@@ -53,10 +53,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.beginUpdates()
         if !expanded {
-            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Bottom.rawValue)!
+            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Top.rawValue)!
             tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: section), NSIndexPath(forRow: 1, inSection: section)], withRowAnimation: animation)
         } else {
-            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Top.rawValue)!
+            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Bottom.rawValue)!
             tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: section), NSIndexPath(forRow: 1, inSection: section)], withRowAnimation: animation)
         }
         sectionExpanded[section] = !sectionExpanded[section]
