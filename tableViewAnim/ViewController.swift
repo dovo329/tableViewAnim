@@ -24,8 +24,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        tableView.registerClass(HeaderView.self, forHeaderFooterViewReuseIdentifier: kSectionHeaderId)
+        /*
         var sectionHeaderNib = UINib(nibName: "HeaderView", bundle: nil)
         tableView.registerNib(sectionHeaderNib, forHeaderFooterViewReuseIdentifier: kSectionHeaderId)
+        */
     }
 
     override func didReceiveMemoryWarning() {
