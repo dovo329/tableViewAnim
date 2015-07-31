@@ -33,24 +33,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func animateSection(sender: UIBarButtonItem) {
-        println("doing animation toggle:\(toggle)")
-        
-        tableView.beginUpdates()
-        if toggle {
-            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Bottom.rawValue)!
-            sectionExpanded[0] = true
-            tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0), NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: animation)
-        } else {
-            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Top.rawValue)!
-            sectionExpanded[0] = false
-            tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0), NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: animation)
-        }
-        tableView.endUpdates()
-        
-        toggle = !toggle
-    }
-    
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(kSectionHeaderId) as! HeaderView

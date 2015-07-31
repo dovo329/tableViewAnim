@@ -42,13 +42,7 @@
                             <constraint firstAttribute="height" secondItem="yCh-R6-kZg" secondAttribute="height" id="q4V-Mi-ooH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Table Anim!" id="aJ8-NT-f5v">
-                        <barButtonItem key="rightBarButtonItem" title="Animate!" id="qlH-oL-Z4e">
-                            <connections>
-                                <action selector="animateSection:" destination="BYZ-38-t0r" id="CQE-1T-d0t"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Table Anim!" id="aJ8-NT-f5v"/>
                     <connections>
                         <outlet property="tableView" destination="yCh-R6-kZg" id="Wux-k6-ZuM"/>
                     </connections>
