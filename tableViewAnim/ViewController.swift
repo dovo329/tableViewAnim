@@ -11,7 +11,7 @@ import UIKit
 let kCellId = "cell.id"
 let kSectionHeaderId = "section.header.id"
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -38,11 +38,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.beginUpdates()
         if toggle {
-            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Top.rawValue)!
+            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Bottom.rawValue)!
             sectionExpanded[0] = true
             tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0), NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: animation)
         } else {
-            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Bottom.rawValue)!
+            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Top.rawValue)!
             sectionExpanded[0] = false
             tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0), NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: animation)
         }
@@ -55,10 +55,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(kSectionHeaderId) as! HeaderView
 
+        headerView.delegate = self
         headerView.section = section
         headerView.name.text = String(format:"name %d", section)
         
         return headerView
+    }
+    
+    // MARK: HeaderViewDelegate method
+    func tappedOnSection(section: Int) {
+        let expanded = sectionExpanded[section]
+        
+        tableView.beginUpdates()
+        if !expanded {
+            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Bottom.rawValue)!
+            tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: section), NSIndexPath(forRow: 1, inSection: section)], withRowAnimation: animation)
+        } else {
+            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Top.rawValue)!
+            tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: section), NSIndexPath(forRow: 1, inSection: section)], withRowAnimation: animation)
+        }
+        sectionExpanded[section] = !sectionExpanded[section]
+        tableView.endUpdates()
     }
     
     func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
@@ -92,11 +109,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        /*if section == 0 {
             return sectionExpanded[0] ? 2 : 0
         } else {
             return 2
-        }
+        }*/
+        return sectionExpanded[section] ? 2 : 0
     }
 }
 
