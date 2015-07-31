@@ -49,14 +49,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: HeaderViewDelegate method
     func tappedOnSection(section: Int) {
-        let expanded = sectionExpanded[section]
         
         tableView.beginUpdates()
+        // unexpand already expanded sections
+        for section in 0...sectionExpanded.count-1 {
+            if sectionExpanded[section] {
+                let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Top.rawValue)!
+                tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: section), NSIndexPath(forRow: 1, inSection: section)], withRowAnimation: animation)
+                sectionExpanded[section] = false
+            }
+        }
+        
+        let expanded = sectionExpanded[section]
         if !expanded {
             let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Top.rawValue)!
             tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: section), NSIndexPath(forRow: 1, inSection: section)], withRowAnimation: animation)
         } else {
-            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Bottom.rawValue)!
+            let animation = UITableViewRowAnimation(rawValue: UITableViewRowAnimation.Top.rawValue)!
             tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: section), NSIndexPath(forRow: 1, inSection: section)], withRowAnimation: animation)
         }
         sectionExpanded[section] = !sectionExpanded[section]
