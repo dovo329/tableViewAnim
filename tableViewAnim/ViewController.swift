@@ -26,9 +26,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         var sectionHeaderNib = UINib(nibName: "HeaderView", bundle: nil)
         tableView.registerNib(sectionHeaderNib, forHeaderFooterViewReuseIdentifier: kSectionHeaderId)
-        
-        /*UINib *sectionHeaderNib = [UINib nibWithNibName:@"SectionHeaderView" bundle:nil];
-        [self.tableView registerNib:sectionHeaderNib forHeaderFooterViewReuseIdentifier:SectionHeaderViewIdentifier];*/
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,18 +52,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        /*APLSectionHeaderView *sectionHeaderView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:SectionHeaderViewIdentifier];
-        
-        APLSectionInfo *sectionInfo = (self.sectionInfoArray)[section];
-        sectionInfo.headerView = sectionHeaderView;
-        
-        sectionHeaderView.titleLabel.text = sectionInfo.play.name;
-        sectionHeaderView.section = section;
-        sectionHeaderView.delegate = self;
-        
-        return sectionHeaderView;*/
         
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(kSectionHeaderId) as! HeaderView
+
+        headerView.section = section
+        headerView.name.text = String(format:"name %d", section)
         
         return headerView
     }

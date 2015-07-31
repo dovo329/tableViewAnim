@@ -34,6 +34,9 @@
                 <constraint firstItem="ge4-o5-zaS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="v2H-bL-BbW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="name" destination="mP4-oI-Eiy" id="Zbn-Km-WI9"/>
+            </connections>
             <point key="canvasLocation" x="255" y="195"/>
         </view>
     </objects>
